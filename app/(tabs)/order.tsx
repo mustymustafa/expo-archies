@@ -10,6 +10,8 @@ import { Starburst } from '@/components/Starburst';
 import { Ribbon } from '@/components/Ribbon';
 import { SectionHead } from '@/components/SectionHead';
 import { FoodSlot } from '@/components/FoodSlot';
+import { MenuFab } from '@/components/MenuFab';
+import { BagButton } from '@/components/BagButton';
 import { foodImages } from '@/lib/foodImages';
 import { colors, shadow } from '@/theme/tokens';
 
@@ -28,7 +30,7 @@ export default function OrderScreen() {
       }}>
         <CircleBtn onPress={() => router.push('/menu')}><Icons.Menu size={18}/></CircleBtn>
         <Mono size={11} color={colors.ink}>ORDER</Mono>
-        <CircleBtn><Icons.Bag size={18}/></CircleBtn>
+        <BagButton onPress={() => router.push('/bag')}/>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}
@@ -129,15 +131,47 @@ export default function OrderScreen() {
         <View style={{ marginTop: 24 }}>
           <SectionHead kicker="Browse the menu" title="WHAT'S GOOD"/>
           <View style={{ paddingHorizontal: 18, flexDirection: 'row', gap: 12 }}>
-            <CategoryTile tone="pink" title="BURGERS" count="14 OPTIONS" big image={foodImages.burgers}/>
+            <CategoryTile
+              tone="pink"
+              title="BURGERS"
+              count="14 OPTIONS"
+              big
+              image={foodImages.burgers}
+              onPress={() => router.push('/browse-menu?category=burgers')}
+            />
             <View style={{ flex: 1, gap: 12 }}>
-              <CategoryTile tone="cream" title="SHAKES" count="9" image={foodImages.shake}/>
-              <CategoryTile tone="blush" title="SIDES" count="11" image={foodImages.fries}/>
+              <CategoryTile
+                tone="cream"
+                title="SHAKES"
+                count="9"
+                image={foodImages.shake}
+                onPress={() => router.push('/browse-menu?category=shakes')}
+              />
+              <CategoryTile
+                tone="blush"
+                title="SIDES"
+                count="11"
+                image={foodImages.fries}
+                onPress={() => router.push('/browse-menu?category=sides')}
+              />
             </View>
           </View>
           <View style={{ paddingHorizontal: 18, flexDirection: 'row', gap: 12, marginTop: 12 }}>
-            <CategoryTile tone="night" title="LATE NIGHT" count="OPEN 'TIL 3AM" image={foodImages.wings}/>
-            <CategoryTile tone="deep" title="SECRET MENU" count="MEMBERS ONLY" lock image={foodImages.spread}/>
+            <CategoryTile
+              tone="night"
+              title="LATE NIGHT"
+              count="OPEN 'TIL 3AM"
+              image={foodImages.late}
+              onPress={() => router.push('/browse-menu?category=late')}
+            />
+            <CategoryTile
+              tone="deep"
+              title="SECRET MENU"
+              count="MEMBERS ONLY"
+              lock
+              image={foodImages.secret}
+              onPress={() => router.push('/browse-menu?category=secret')}
+            />
           </View>
         </View>
 
@@ -151,6 +185,8 @@ export default function OrderScreen() {
           </View>
         </View>
       </ScrollView>
+
+      <MenuFab onPress={() => router.push('/browse-menu')}/>
     </View>
   );
 }
@@ -165,17 +201,33 @@ function CircleBtn({ children, onPress }: any) {
   );
 }
 
-function CategoryTile({ tone, title, count, big, lock }: any) {
+function CategoryTile({ tone, title, count, big, lock, image, onPress }: any) {
   const height = big ? 296 : 142;
-  const flex = big ? undefined : undefined;
   const isDark = ['pink', 'night', 'deep'].includes(tone);
   return (
-    <View style={{
-      flex: big ? 1 : 1, height,
-      borderRadius: 22, overflow: 'hidden',
-      borderWidth: 1.5, borderColor: colors.ink,
-    }}>
-      <FoodSlot tone={tone} radius={0} label={title.toLowerCase()} style={{ flex: 1 }}/>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => ({
+        flex: 1,
+        height,
+        borderRadius: 22,
+        overflow: 'hidden',
+        borderWidth: 1.5,
+        borderColor: colors.ink,
+        opacity: pressed ? 0.94 : 1,
+      })}
+    >
+      <FoodSlot tone={tone} radius={0} image={image} style={{ flex: 1 }}/>
+      {isDark && (
+        <View
+          pointerEvents="none"
+          style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(31,16,20,0.25)',
+          }}
+        />
+      )}
       <View style={{ position: 'absolute', left: 14, right: 14, bottom: 14 }}>
         {lock && (
           <View style={{
@@ -187,10 +239,23 @@ function CategoryTile({ tone, title, count, big, lock }: any) {
             <Mono size={9} color={colors.cream}>★ TIER 02+</Mono>
           </View>
         )}
-        <Display size={big ? 28 : 18} color={isDark ? colors.cream : colors.ink}>{title}</Display>
-        <Mono size={9} color={isDark ? 'rgba(255,241,220,0.85)' : colors.ink2} style={{ marginTop: 2 }}>{count}</Mono>
+        <Display
+          size={big ? 28 : 18}
+          color={isDark ? colors.cream : colors.ink}
+          shadow={isDark ? { color: 'rgba(31,16,20,0.5)', x: 2, y: 2 } : undefined}
+          numberOfLines={2}
+        >
+          {title}
+        </Display>
+        <Mono
+          size={9}
+          color={isDark ? 'rgba(255,241,220,0.85)' : colors.ink2}
+          style={{ marginTop: 2 }}
+        >
+          {count}
+        </Mono>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

@@ -9,6 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useArchiesFonts } from '@/hooks/useArchiesFonts';
 import { View } from 'react-native';
 import { colors } from '@/theme/tokens';
+import { CartProvider } from '@/store/cart';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -20,14 +21,21 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.cream } }}>
-          <Stack.Screen name="welcome" />
-          <Stack.Screen name="login" options={{ presentation: 'card' }}/>
-          <Stack.Screen name="signup" options={{ presentation: 'card' }}/>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="refer" options={{ presentation: 'modal' }}/>
-          <Stack.Screen name="menu" options={{ presentation: 'modal' }}/>
-        </Stack>
+        <CartProvider>
+          <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.cream } }}>
+            <Stack.Screen name="welcome" />
+            <Stack.Screen name="login" options={{ presentation: 'card' }}/>
+            <Stack.Screen name="signup" options={{ presentation: 'card' }}/>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="refer" options={{ presentation: 'modal' }}/>
+            <Stack.Screen name="menu" options={{ presentation: 'modal' }}/>
+            <Stack.Screen name="browse-menu" options={{ presentation: 'modal', animation: 'slide_from_bottom' }}/>
+            <Stack.Screen name="item/[slug]" options={{ presentation: 'modal', animation: 'slide_from_bottom' }}/>
+            <Stack.Screen name="bag" options={{ presentation: 'modal', animation: 'slide_from_bottom' }}/>
+            <Stack.Screen name="checkout" options={{ presentation: 'modal', animation: 'slide_from_right' }}/>
+            <Stack.Screen name="order-confirmation" options={{ gestureEnabled: false, animation: 'fade', headerBackVisible: false }}/>
+          </Stack>
+        </CartProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
