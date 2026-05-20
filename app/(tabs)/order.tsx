@@ -10,6 +10,7 @@ import { Starburst } from '@/components/Starburst';
 import { Ribbon } from '@/components/Ribbon';
 import { SectionHead } from '@/components/SectionHead';
 import { FoodSlot } from '@/components/FoodSlot';
+import { foodImages } from '@/lib/foodImages';
 import { colors, shadow } from '@/theme/tokens';
 
 export default function OrderScreen() {
@@ -25,7 +26,7 @@ export default function OrderScreen() {
         paddingTop: insets.top + 8, paddingHorizontal: 22, paddingBottom: 12,
         flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
       }}>
-        <CircleBtn onPress={() => router.back()}><Icons.Back size={18}/></CircleBtn>
+        <CircleBtn onPress={() => router.push('/menu')}><Icons.Menu size={18}/></CircleBtn>
         <Mono size={11} color={colors.ink}>ORDER</Mono>
         <CircleBtn><Icons.Bag size={18}/></CircleBtn>
       </View>
@@ -38,7 +39,7 @@ export default function OrderScreen() {
           <Ribbon tone="pink" tilt={-3} style={{ marginBottom: 14 }}>» DRIVE-IN · DELIVERED «</Ribbon>
           <Display size={56} color={colors.ink} shadow={{ color: colors.pink, x: 5, y: 5 }}>WHAT'RE</Display>
           <Display size={56} color={colors.ink} shadow={{ color: colors.pink, x: 5, y: 5 }}>YOU</Display>
-          <Italic size={56} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }}>cravin'?</Italic>
+          <Italic size={56} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }} style={{ marginTop: -10, marginLeft: 6 }}>cravin'?</Italic>
           <View style={{ position: 'absolute', top: 2, right: 16 }}>
             <Starburst size={66} points={16} fill={colors.butter} rotate={20}>
               <Display size={14} color={colors.ink}>OPEN{'\n'}NOW</Display>
@@ -108,7 +109,7 @@ export default function OrderScreen() {
             ...shadow(colors.ink, 3, 3),
           }}>
             <View style={{ width: 88, height: 88, borderRadius: 16, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink }}>
-              <FoodSlot tone="pink" radius={0} label="basket" style={{ flex: 1 }}/>
+              <FoodSlot tone="pink" radius={0} label="basket" image={foodImages.smash} style={{ flex: 1 }}/>
             </View>
             <View style={{ flex: 1 }}>
               <Mono size={9} color={colors.pinkDeep}>BASKET · 3 ITEMS</Mono>
@@ -128,15 +129,15 @@ export default function OrderScreen() {
         <View style={{ marginTop: 24 }}>
           <SectionHead kicker="Browse the menu" title="WHAT'S GOOD"/>
           <View style={{ paddingHorizontal: 18, flexDirection: 'row', gap: 12 }}>
-            <CategoryTile tone="pink" title="BURGERS" count="14 OPTIONS" big/>
+            <CategoryTile tone="pink" title="BURGERS" count="14 OPTIONS" big image={foodImages.burgers}/>
             <View style={{ flex: 1, gap: 12 }}>
-              <CategoryTile tone="cream" title="SHAKES" count="9"/>
-              <CategoryTile tone="blush" title="SIDES" count="11"/>
+              <CategoryTile tone="cream" title="SHAKES" count="9" image={foodImages.shake}/>
+              <CategoryTile tone="blush" title="SIDES" count="11" image={foodImages.fries}/>
             </View>
           </View>
           <View style={{ paddingHorizontal: 18, flexDirection: 'row', gap: 12, marginTop: 12 }}>
-            <CategoryTile tone="night" title="LATE NIGHT" count="OPEN 'TIL 3AM"/>
-            <CategoryTile tone="deep" title="SECRET MENU" count="MEMBERS ONLY" lock/>
+            <CategoryTile tone="night" title="LATE NIGHT" count="OPEN 'TIL 3AM" image={foodImages.wings}/>
+            <CategoryTile tone="deep" title="SECRET MENU" count="MEMBERS ONLY" lock image={foodImages.spread}/>
           </View>
         </View>
 

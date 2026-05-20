@@ -115,7 +115,9 @@ export default function MenuScreen() {
 
         <View style={{ paddingHorizontal: 22, paddingTop: 20, paddingBottom: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <Mono size={10} color="rgba(255,241,220,0.4)">v4.2.1 · ARCHIE'S</Mono>
-          <Mono size={11} color={colors.pink2}>SIGN OUT</Mono>
+          <Pressable onPress={() => { router.dismissAll?.(); router.replace('/welcome'); }}>
+            <Mono size={11} color={colors.pink2}>SIGN OUT</Mono>
+          </Pressable>
         </View>
       </ScrollView>
     </View>

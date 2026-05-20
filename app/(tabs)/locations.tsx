@@ -24,18 +24,18 @@ export default function LocationsScreen() {
         paddingTop: insets.top + 8, paddingHorizontal: 22,
         flexDirection: 'row', justifyContent: 'space-between',
       }}>
-        <Pressable onPress={() => router.back()} style={{
+        <Pressable onPress={() => router.push('/menu')} style={{
           width: 44, height: 44, borderRadius: 22, backgroundColor: '#fff',
           borderWidth: 1.5, borderColor: colors.ink,
           alignItems: 'center', justifyContent: 'center',
-        }}><Icons.Back size={18}/></Pressable>
+        }}><Icons.Menu size={18}/></Pressable>
         <View style={{ width: 44 }}/>
       </View>
 
       <View style={{ paddingHorizontal: 22, paddingTop: 8 }}>
         <Ribbon tone="pink" tilt={-2} style={{ marginBottom: 12 }}>★ 47 ACROSS THE UK ★</Ribbon>
         <Display size={56} color={colors.ink} shadow={{ color: colors.pink, x: 5, y: 5 }}>FIND</Display>
-        <Italic size={56} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }}>your fix.</Italic>
+        <Italic size={56} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }} style={{ marginTop: -10, marginLeft: 6 }}>your fix.</Italic>
       </View>
 
       <View style={{ paddingHorizontal: 22, paddingTop: 14, paddingBottom: 16 }}>
