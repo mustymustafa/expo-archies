@@ -28,6 +28,51 @@ export const CATEGORIES: MenuCategory[] = [
     label: "Smashed Burgers",
     items: [
       {
+        slug: "triple-smash-combo",
+        name: "Triple Smash Combo",
+        description:
+          "Three smashed patties, double cheese, Star sauce, curly fries and a hand-spun OG shake.",
+        priceGBP: 11.2,
+        kcal: 1180,
+        image: "combo",
+        removables: ["Cheese", "Sauce", "Pickles"],
+        extras: [
+          { id: "upgrade-shake", label: "Upgrade to Salted Caramel Shake", deltaGBP: 0.95 },
+          { id: "add-bacon", label: "Add bacon", deltaGBP: 1.5 },
+        ],
+        tag: "★ Your #1",
+      },
+      {
+        slug: "double-cheese-smash",
+        name: "Double Cheese Smash",
+        description:
+          "Two smashed patties, four squares of American cheese, dill pickles, mustard glaze, brioche.",
+        priceGBP: 9.0,
+        kcal: 902,
+        image: "burgers",
+        removables: ["Cheese", "Pickles", "Mustard"],
+        extras: [
+          { id: "add-patty", label: "Add patty", deltaGBP: 2.5 },
+          { id: "double-cheese", label: "Quadruple cheese", deltaGBP: 1.4 },
+        ],
+        tag: "🔥 Trending",
+      },
+      {
+        slug: "og-smash",
+        name: "The OG Smash",
+        description:
+          "The original — single smashed patty, American cheese, OG sauce, white onion, soft milk bun.",
+        priceGBP: 7.5,
+        kcal: 720,
+        image: "og",
+        removables: ["Cheese", "Onion", "OG Sauce"],
+        extras: [
+          { id: "add-patty", label: "Make it a double", deltaGBP: 2.5 },
+          { id: "add-bacon", label: "Add bacon", deltaGBP: 1.5 },
+        ],
+        tag: "★ No.1 this week",
+      },
+      {
         slug: "superstar",
         name: "Superstar",
         description:
@@ -117,6 +162,18 @@ export const CATEGORIES: MenuCategory[] = [
         tag: "🔥 Trending",
       },
       {
+        slug: "pink-sauce-crispy",
+        name: "Pink Sauce Crispy",
+        description:
+          "Buttermilk-fried chicken doused in our cult pink sauce, slaw, pickles, brioche.",
+        priceGBP: 9.5,
+        kcal: 810,
+        image: "pink",
+        removables: ["Slaw", "Pickles", "Pink Sauce"],
+        extras: [{ id: "extra-pink", label: "Extra pink sauce", deltaGBP: 0.5 }],
+        tag: "↑ Trending",
+      },
+      {
         slug: "tenders-3pc",
         name: "Tenders · 3pc",
         description: "Hand-breaded tenders, choose your dip.",
@@ -159,6 +216,20 @@ export const CATEGORIES: MenuCategory[] = [
         priceGBP: 4.5,
         kcal: 470,
         image: "milkshake",
+      },
+      {
+        slug: "og-milkshake-stack",
+        name: "OG Milkshake Stack",
+        description:
+          "Triple-thick milkshake stacked with brownie chunks, whipped cream and a wafer.",
+        priceGBP: 6.5,
+        kcal: 720,
+        image: "milkshake",
+        extras: [
+          { id: "extra-brownie", label: "Extra brownie chunks", deltaGBP: 0.7 },
+          { id: "vegan", label: "Make it vegan", deltaGBP: 0.7 },
+        ],
+        tag: "🌙 Late night fave",
       },
     ],
   },

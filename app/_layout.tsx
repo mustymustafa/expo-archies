@@ -32,6 +32,8 @@ export default function RootLayout() {
             <Stack.Screen name="browse-menu" options={{ presentation: 'modal', animation: 'slide_from_bottom' }}/>
             <Stack.Screen name="item/[slug]" options={{ presentation: 'modal', animation: 'slide_from_bottom' }}/>
             <Stack.Screen name="bag" options={{ presentation: 'modal', animation: 'slide_from_bottom' }}/>
+            <Stack.Screen name="checkout" options={{ presentation: 'modal', animation: 'slide_from_right' }}/>
+            <Stack.Screen name="order-confirmation" options={{ gestureEnabled: false, animation: 'fade', headerBackVisible: false }}/>
           </Stack>
         </CartProvider>
       </SafeAreaProvider>

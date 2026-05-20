@@ -158,7 +158,7 @@ export default function BagScreen() {
             }}
           >
             <Pressable
-              onPress={() => router.back()}
+              onPress={() => router.push('/checkout')}
               style={({ pressed }) => ({
                 backgroundColor: colors.ink,
                 borderRadius: 999,
