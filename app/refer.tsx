@@ -51,7 +51,7 @@ export default function ReferScreen() {
                 <Ribbon tone="butter" tilt={-3}>★ REFER · EARN · REPEAT ★</Ribbon>
                 <Display size={66} color={colors.cream} shadow={{ color: colors.ink, x: 5, y: 5 }} style={{ marginTop: 14 }}>BRING</Display>
                 <Display size={66} color={colors.cream} shadow={{ color: colors.ink, x: 5, y: 5 }}>A FRIEND.</Display>
-                <Italic size={56} color={colors.butter} shadow={{ color: colors.ink, x: 5, y: 5 }}>eat free.</Italic>
+                <Italic size={56} color={colors.butter} shadow={{ color: colors.ink, x: 5, y: 5 }} style={{ marginTop: -10, marginLeft: 6 }}>eat free.</Italic>
 
                 <View style={{ flexDirection: 'row', gap: 10, marginTop: 22 }}>
                   <RewardChip kind="cream" kicker="FOR YOU" sum="£5" desc="off your next"/>
@@ -121,7 +121,7 @@ function RewardChip({ kind, kicker, sum, desc }: any) {
     }}>
       <Mono size={9} color={isCream ? colors.pinkDeep : colors.ink}>{kicker}</Mono>
       <Display size={36} color={colors.ink} style={{ marginTop: 2 }}>{sum}</Display>
-      <Italic size={13} color={colors.ink2} style={{ marginTop: 2 }}>{desc}</Italic>
+      <Italic size={13} color={colors.ink2} upper={false} style={{ marginTop: 2 }}>{desc}</Italic>
     </View>
   );
 }

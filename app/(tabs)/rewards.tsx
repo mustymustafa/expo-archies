@@ -23,11 +23,11 @@ export default function RewardsScreen() {
         paddingTop: insets.top + 8, paddingHorizontal: 22, paddingBottom: 12,
         flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
       }}>
-        <Pressable onPress={() => router.back()} style={{
+        <Pressable onPress={() => router.push('/menu')} style={{
           width: 44, height: 44, borderRadius: 22, backgroundColor: colors.cream,
           borderWidth: 1.5, borderColor: colors.ink,
           alignItems: 'center', justifyContent: 'center',
-        }}><Icons.Back size={18}/></Pressable>
+        }}><Icons.Menu size={18}/></Pressable>
         <Mono size={10} color={colors.ink}>MEMBER · 9050 · 0150 · 9888</Mono>
         <View style={{ width: 44 }}/>
       </View>
@@ -38,8 +38,8 @@ export default function RewardsScreen() {
         {/* Title */}
         <View style={{ paddingHorizontal: 22, paddingTop: 4, paddingBottom: 18 }}>
           <Ribbon tone="pink" tilt={-2} style={{ marginBottom: 14 }}>★ ADDICTS PROGRAM ★</Ribbon>
-          <Display size={66} color={colors.ink} shadow={{ color: colors.pink, x: 5, y: 5 }}>REWARD</Display>
-          <Italic size={66} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }}>yourself.</Italic>
+          <Display size={58} color={colors.ink} shadow={{ color: colors.pink, x: 5, y: 5 }}>REWARD</Display>
+          <Italic size={58} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }} style={{ marginTop: -12, marginLeft: 6 }}>yourself.</Italic>
         </View>
 
         {/* Hero tracker */}
@@ -139,7 +139,7 @@ function RewardCard({ status, title, sub, meta, cost }: any) {
       <View style={{ flex: 1, paddingLeft: 4 }}>
         <Mono size={10} color={isReady ? colors.pinkDeep : colors.mute2}>{isReady ? '★ READY TO CLAIM' : '· LOCKED ·'}</Mono>
         <Display size={22} color={colors.ink}>{title}</Display>
-        <Italic size={14} color={colors.ink2}>{sub}</Italic>
+        <Italic size={14} color={colors.ink2} upper={false}>{sub}</Italic>
         <Mono size={10} color={colors.mute} style={{ marginTop: 4 }}>{meta}</Mono>
       </View>
       {isReady && (

@@ -3,7 +3,7 @@ import React from 'react';
 import { View, ScrollView, TextInput, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
-import { Display, Italic, Mono, Body } from '@/components/Type';
+import { Display, Italic, Mono } from '@/components/Type';
 import { Pill } from '@/components/Pill';
 import { Logo } from '@/components/Logo';
 import { Icons } from '@/components/Icon';
@@ -46,7 +46,7 @@ export default function LoginScreen() {
         </View>
         <Display size={68} color={colors.ink} shadow={{ color: colors.pink, x: 5, y: 5 }}>HUNGRY,</Display>
         <Display size={68} color={colors.ink} shadow={{ color: colors.pink, x: 5, y: 5 }}>AREN'T</Display>
-        <Italic size={68} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }}>you?</Italic>
+        <Italic size={68} color={colors.pink} shadow={{ color: colors.ink, x: 5, y: 5 }} style={{ marginTop: -14, marginLeft: 6 }}>you?</Italic>
 
         {/* Inputs */}
         <View style={{ marginTop: 32, gap: 14 }}>
@@ -66,9 +66,13 @@ export default function LoginScreen() {
             <Mono size={10} color={colors.mute}>OR</Mono>
             <View style={{ flex: 1, height: 1, backgroundColor: colors.line2 }}/>
           </View>
-          <Pill kind="ink" size="lg" full icon={<Icons.Face color={colors.butter} size={18}/>}>
+          <Pill kind="ink" size="lg" full icon={<Icons.Face color={colors.butter} size={18}/>} onPress={() => router.replace('/home')}>
             Sign in with Face ID
           </Pill>
+          <Mono size={11} color={colors.mute} style={{ textAlign: 'center', marginTop: 6 }}>
+            Don't have an account?{' '}
+            <Mono size={11} color={colors.pinkDeep} onPress={() => router.replace('/signup')}>Sign up</Mono>
+          </Mono>
         </View>
       </ScrollView>
     </View>

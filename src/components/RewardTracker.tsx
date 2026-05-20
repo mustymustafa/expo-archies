@@ -39,8 +39,8 @@ export function RewardTracker({ points = 42, target = 50 }: Props) {
         {/* corner starburst */}
         <View style={{ position: 'absolute', top: -4, right: -6, zIndex: 3 }}>
           <Starburst size={78} points={14} fill={colors.butter} rotate={16}>
-            <Display size={13} color={colors.ink}>NEXT{'\n'}REWARD</Display>
-            <Mono size={9} color={colors.ink} style={{ marginTop: 2 }}>{target - points} PTS</Mono>
+            <Display size={13} color={colors.ink} style={{ textAlign: 'center' }}>NEXT{'\n'}REWARD</Display>
+            <Mono size={9} color={colors.ink} style={{ marginTop: 2, textAlign: 'center' }}>{target - points} PTS</Mono>
           </Starburst>
         </View>
 
@@ -54,8 +54,8 @@ export function RewardTracker({ points = 42, target = 50 }: Props) {
               /{target}
             </Display>
           </View>
-          <Italic size={18} color={colors.cream}>
-            <Italic size={18} color={colors.butter}>{target - points} pts </Italic>'til your next bite.
+          <Italic size={18} color={colors.cream} upper={false} style={{ marginTop: 2 }}>
+            <Italic size={18} color={colors.butter} upper={false}>{target - points} pts </Italic>'til your next bite.
           </Italic>
         </View>
 

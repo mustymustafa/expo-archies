@@ -36,7 +36,7 @@ export default function ScanScreen() {
         <Display size={32} color={colors.cream} shadow={{ color: colors.ink, x: 3, y: 3 }} style={{ marginTop: 32 }}>
           SHOW THIS
         </Display>
-        <Italic size={32} color={colors.butter} shadow={{ color: colors.ink, x: 3, y: 3 }}>
+        <Italic size={32} color={colors.butter} shadow={{ color: colors.ink, x: 3, y: 3 }} style={{ marginTop: -6, marginLeft: 4 }}>
           to earn pts.
         </Italic>
         <Mono size={11} color={colors.cream} style={{ marginTop: 16, opacity: 0.85 }}>
