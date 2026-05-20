@@ -10,6 +10,7 @@ import { Display, Italic, Mono, Body } from '@/components/Type';
 import { Icons } from '@/components/Icon';
 import { Ribbon } from '@/components/Ribbon';
 import { useCart } from '@/store/cart';
+import { comingSoon } from '@/lib/comingSoon';
 import { colors, shadow } from '@/theme/tokens';
 
 type Address = { id: string; label: string; line1: string; line2: string };
@@ -204,7 +205,7 @@ export default function CheckoutScreen() {
               );
             })}
             <Pressable
-              onPress={() => {}}
+              onPress={() => comingSoon('Add new address')}
               style={({ pressed }) => ({
                 flexDirection: 'row',
                 alignItems: 'center',

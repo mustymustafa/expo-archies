@@ -1,6 +1,6 @@
 // 07 · Locations
 import React from 'react';
-import { View, ScrollView, Pressable, TextInput } from 'react-native';
+import { View, ScrollView, Pressable, TextInput, Linking } from 'react-native';
 import Svg, { Path, Pattern, Rect, Defs, Circle as SvgCircle } from 'react-native-svg';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
@@ -10,6 +10,7 @@ import { Display, Italic, Mono, Body } from '@/components/Type';
 import { Icons } from '@/components/Icon';
 import { Ribbon } from '@/components/Ribbon';
 import { FoodSlot } from '@/components/FoodSlot';
+import { comingSoon } from '@/lib/comingSoon';
 import { colors, shadow, fonts } from '@/theme/tokens';
 
 export default function LocationsScreen() {
@@ -65,57 +66,14 @@ export default function LocationsScreen() {
       <ScrollView showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: insets.bottom + 130 }}>
 
-        {/* Map */}
-        <View style={{ paddingHorizontal: 22, paddingBottom: 20 }}>
-          <View style={{
-            height: 160, borderRadius: 22, overflow: 'hidden',
-            borderWidth: 1.5, borderColor: colors.ink,
-            ...shadow(colors.ink, 3, 3),
-          }}>
-            <LinearGradient
-              colors={[colors.pinkMist, colors.pinkBlush]}
-              style={{ flex: 1, position: 'relative' }}>
-              <Svg width="100%" height="100%" style={{ position: 'absolute' }}>
-                <Defs>
-                  <Pattern id="grid" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-                    <Path d="M28 0H0v28" fill="none" stroke="rgba(122,8,56,0.10)" strokeWidth="1"/>
-                  </Pattern>
-                </Defs>
-                <Rect width="100%" height="100%" fill="url(#grid)"/>
-                <Path d="M0 80 Q80 60, 160 90 T 360 70" stroke="rgba(122,8,56,0.16)" strokeWidth="3" fill="none"/>
-              </Svg>
-              {/* pins */}
-              {[[60, 60], [140, 90], [220, 50], [280, 95]].map(([x, y], i) => (
-                <View key={i} style={{
-                  position: 'absolute', left: x as number, top: y as number,
-                  transform: [{ translateX: -13 }, { translateY: -26 }],
-                  width: 26, height: 26, borderRadius: 13,
-                  backgroundColor: i === 0 ? colors.ink : colors.pink,
-                  borderWidth: 2, borderColor: colors.cream,
-                  alignItems: 'center', justifyContent: 'center',
-                  ...shadow(colors.ink, 2, 2),
-                }}>
-                  <Icons.Star color={colors.butter} size={12}/>
-                </View>
-              ))}
-              <View style={{
-                position: 'absolute', bottom: 12, right: 12,
-                backgroundColor: colors.cream, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999,
-                flexDirection: 'row', alignItems: 'center', gap: 4,
-                borderWidth: 1.5, borderColor: colors.ink,
-              }}>
-                <Mono size={10} color={colors.ink}>OPEN MAP →</Mono>
-              </View>
-            </LinearGradient>
-          </View>
-        </View>
+  
 
         {/* Restaurant cards */}
         <View style={{ paddingHorizontal: 18, gap: 12 }}>
           <LocationCard featured name="ARCHIE'S PICCADILLY" addr="6 & 7 Gateway House, Piccadilly" mi="0.4 mi" status="OPEN · UNTIL 03:00"/>
           <LocationCard name="ARCHIE'S ARNDALE" addr="Manchester Arndale" mi="0.9 mi" status="OPEN · UNTIL 22:00"/>
-          <LocationCard name="ARCHIE'S OXFORD ST" addr="72 Oxford Street" mi="1.2 mi" status="OPEN · UNTIL 23:00"/>
-          <LocationCard name="ARCHIE'S TRAFFORD" addr="Trafford Palazzo" mi="2.8 mi" status="CLOSES 22:00 · 18 MIN" warn/>
+          <LocationCard name="ARCHIE'S OXFORD ST" addr="72 Oxford Street, Manchester" mi="1.2 mi" status="OPEN · UNTIL 23:00"/>
+          <LocationCard name="ARCHIE'S TRAFFORD" addr="Trafford Palazzo, Manchester" mi="2.8 mi" status="CLOSES 22:00 · 18 MIN" warn/>
         </View>
       </ScrollView>
     </View>
@@ -123,14 +81,19 @@ export default function LocationsScreen() {
 }
 
 function LocationCard({ name, addr, mi, status, featured, warn }: any) {
+  const openMaps = () => {
+    const query = encodeURIComponent(`${name}, ${addr}`);
+    Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${query}`).catch(() => {});
+  };
   return (
-    <View style={{
+    <Pressable onPress={openMaps} style={({ pressed }) => ({
       backgroundColor: featured ? colors.ink : '#fff',
       borderRadius: 22, padding: 16,
       flexDirection: 'row', alignItems: 'center', gap: 14,
       borderWidth: 1.5, borderColor: colors.ink,
+      opacity: pressed ? 0.94 : 1,
       ...shadow(featured ? colors.pinkDeep : colors.ink, 4, 4),
-    }}>
+    })}>
       {featured && (
         <View style={{
           position: 'absolute', top: 12, right: 12,
@@ -140,8 +103,17 @@ function LocationCard({ name, addr, mi, status, featured, warn }: any) {
           <Mono size={9} color={colors.cream}>★ CLOSEST</Mono>
         </View>
       )}
-      <View style={{ width: 60, height: 60, borderRadius: 16, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink }}>
+      <View style={{
+        width: 60, height: 60, borderRadius: 16, overflow: 'hidden',
+        borderWidth: 1.5, borderColor: colors.ink,
+      }}>
         <FoodSlot tone={featured ? 'pink' : 'blush'} radius={0} style={{ flex: 1 }}/>
+        <View pointerEvents="none" style={{
+          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+          alignItems: 'center', justifyContent: 'center',
+        }}>
+          <Icons.Pin color={featured ? colors.cream : colors.ink} size={28}/>
+        </View>
       </View>
       <View style={{ flex: 1, paddingRight: featured ? 72 : 0 }}>
         <Mono size={10} color={featured ? 'rgba(255,241,220,0.6)' : colors.mute}>{mi} AWAY · MANCHESTER</Mono>
@@ -152,6 +124,6 @@ function LocationCard({ name, addr, mi, status, featured, warn }: any) {
           <Mono size={10} color={warn ? colors.pink : featured ? colors.butter : colors.pinkDeep}>{status}</Mono>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }

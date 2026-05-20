@@ -1,6 +1,6 @@
 // 09 · Side Menu / Profile — dark theme
 import React from 'react';
-import { View, ScrollView, Pressable } from 'react-native';
+import { View, ScrollView, Pressable, Linking } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
@@ -9,6 +9,7 @@ import { Display, Italic, Mono, Body } from '@/components/Type';
 import { Icons } from '@/components/Icon';
 import { Halftone } from '@/components/Halftone';
 import { Logo } from '@/components/Logo';
+import { comingSoon } from '@/lib/comingSoon';
 import { colors, shadow } from '@/theme/tokens';
 
 export default function MenuScreen() {
@@ -28,11 +29,7 @@ export default function MenuScreen() {
           backgroundColor: 'rgba(255,255,255,0.10)',
           alignItems: 'center', justifyContent: 'center',
         }}><Icons.Close color={colors.cream} size={14}/></Pressable>
-        <View style={{
-          width: 44, height: 44, borderRadius: 22,
-          backgroundColor: 'rgba(255,255,255,0.10)',
-          alignItems: 'center', justifyContent: 'center',
-        }}><Icons.Bell color={colors.cream} size={18}/></View>
+    
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}
@@ -50,7 +47,7 @@ export default function MenuScreen() {
           <View style={{ flex: 1 }}>
             <Mono size={11} color={colors.pink2}>★ TIER 02 · REGULAR</Mono>
             <Display size={26} color={colors.cream} style={{ marginTop: 4 }}>JAMES CARTER</Display>
-            <Mono size={10} color="rgba(255,241,220,0.5)" style={{ marginTop: 2 }}>MEMBER SINCE AUG 2024</Mono>
+            <Mono size={10} color="rgba(255,241,220,0.5)" style={{ marginTop: 2 }}>MEMBER SINCE MAY 2026</Mono>
           </View>
         </View>
 
@@ -97,20 +94,28 @@ export default function MenuScreen() {
         {/* Menu lists */}
         <View style={{ paddingHorizontal: 22 }}>
           <MenuGroup title="My stuff">
-            <MenuRow icon={<Icons.Bookmark color={colors.cream} size={18}/>} label="Saved favorites" detail="14"/>
-            <MenuRow icon={<Icons.Refresh color={colors.cream} size={18}/>} label="Order history" detail="23 orders"/>
+                        <MenuRow icon={<Icons.Share color={colors.cream} size={18}/>} label="Refer a friend" onPress={() => router.push('/refer')}/>
+            <MenuRow icon={<Icons.Bookmark color={colors.cream} size={18}/>} label="Saved favorites" detail="14" onPress={() => comingSoon('Saved favorites')}/>
+            <MenuRow icon={<Icons.Refresh color={colors.cream} size={18}/>} label="Order history" detail="23 orders" onPress={() => comingSoon('Order history')}/>
             <MenuRow icon={<Icons.Heart color={colors.cream} size={18}/>} label="Rewards" detail="1 ready" highlight/>
           </MenuGroup>
-          <MenuGroup title="Account">
-            <MenuRow icon={<Icons.Face color={colors.cream} size={18}/>} label="Sign-in & Face ID"/>
-            <MenuRow icon={<Icons.Pin color={colors.cream} size={18}/>} label="Addresses"/>
-            <MenuRow icon={<Icons.Message color={colors.cream} size={18}/>} label="Messages" detail="2 new"/>
-          </MenuGroup>
+      
           <MenuGroup title="More" last>
             <MenuRow icon={<Icons.Share color={colors.cream} size={18}/>} label="Refer a friend" onPress={() => router.push('/refer')}/>
-            <MenuRow icon={<Icons.QR color={colors.cream} size={18}/>} label="eGift cards"/>
-            <MenuRow icon={<Icons.Bell color={colors.cream} size={18}/>} label="Notifications"/>
+            <MenuRow icon={<Icons.QR color={colors.cream} size={18}/>} label="eGift cards" onPress={() => comingSoon('eGift cards')}/>
+            <MenuRow icon={<Icons.Bell color={colors.cream} size={18}/>} label="Notifications" onPress={() => comingSoon('Notifications')}/>
           </MenuGroup>
+        </View>
+
+        {/* Socials */}
+        <View style={{ paddingHorizontal: 22, paddingTop: 24 }}>
+          <Mono size={10} color="rgba(255,241,220,0.45)" style={{ marginBottom: 10, paddingLeft: 4 }}>★ FOLLOW ARCHIE'S ★</Mono>
+          <View style={{ flexDirection: 'row', gap: 10 }}>
+            <SocialTile label="WEB" icon={<Icons.Globe color={colors.cream} size={20}/>}/>
+            <SocialTile label="X" icon={<Icons.X color={colors.cream} size={20}/>}/>
+            <SocialTile label="INSTA" icon={<Icons.Instagram color={colors.cream} size={20}/>}/>
+            <SocialTile label="TIKTOK" icon={<Icons.TikTok color={colors.cream} size={20}/>}/>
+          </View>
         </View>
 
         <View style={{ paddingHorizontal: 22, paddingTop: 20, paddingBottom: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -142,6 +147,29 @@ function MenuGroup({ title, children, last }: any) {
         borderWidth: 1, borderColor: 'rgba(255,255,255,0.06)',
       }}>{children}</View>
     </View>
+  );
+}
+
+function SocialTile({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <Pressable
+      onPress={() => Linking.openURL('https://archies.com').catch(() => {})}
+      style={({ pressed }) => ({
+        flex: 1, alignItems: 'center', gap: 6,
+        paddingVertical: 14, paddingHorizontal: 6, borderRadius: 16,
+        backgroundColor: 'rgba(255,255,255,0.05)',
+        borderWidth: 1, borderColor: 'rgba(255,255,255,0.08)',
+        opacity: pressed ? 0.7 : 1,
+      })}
+    >
+      <View style={{
+        width: 38, height: 38, borderRadius: 12,
+        backgroundColor: colors.pinkDeep,
+        borderWidth: 1.5, borderColor: colors.cream,
+        alignItems: 'center', justifyContent: 'center',
+      }}>{icon}</View>
+      <Mono size={9} color="rgba(255,241,220,0.7)">{label}</Mono>
+    </Pressable>
   );
 }
 

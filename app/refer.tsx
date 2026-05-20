@@ -11,6 +11,7 @@ import { Sunburst } from '@/components/Sunburst';
 import { Halftone } from '@/components/Halftone';
 import { Ribbon } from '@/components/Ribbon';
 import { SectionHead } from '@/components/SectionHead';
+import { comingSoon } from '@/lib/comingSoon';
 import { colors, shadow } from '@/theme/tokens';
 
 export default function ReferScreen() {
@@ -81,7 +82,9 @@ export default function ReferScreen() {
               <Mono size={10} color={colors.mute}>YOUR INVITE CODE</Mono>
               <Display size={24} color={colors.ink} style={{ marginTop: 4 }}>JAMES-9888</Display>
             </View>
-            <Mono size={11} color={colors.pinkDeep}>COPY</Mono>
+            <Pressable hitSlop={8} onPress={() => comingSoon('Copy invite code')}>
+              <Mono size={11} color={colors.pinkDeep}>COPY</Mono>
+            </Pressable>
           </View>
         </View>
 
@@ -128,19 +131,23 @@ function RewardChip({ kind, kicker, sum, desc }: any) {
 
 function ShareTile({ icon, label, children }: any) {
   return (
-    <View style={{
-      flex: 1, backgroundColor: '#fff', borderRadius: 18, paddingHorizontal: 8, paddingVertical: 14,
-      alignItems: 'center', gap: 8,
-      borderWidth: 1.5, borderColor: colors.ink,
-      ...shadow(colors.ink, 2, 2),
-    }}>
+    <Pressable
+      onPress={() => comingSoon(`Share via ${label}`)}
+      style={({ pressed }) => ({
+        flex: 1, backgroundColor: '#fff', borderRadius: 18, paddingHorizontal: 8, paddingVertical: 14,
+        alignItems: 'center', gap: 8,
+        borderWidth: 1.5, borderColor: colors.ink,
+        opacity: pressed ? 0.85 : 1,
+        ...shadow(colors.ink, 2, 2),
+      })}
+    >
       <View style={{
         width: 44, height: 44, borderRadius: 14, backgroundColor: colors.pinkMist,
         borderWidth: 1.5, borderColor: colors.pinkDeep,
         alignItems: 'center', justifyContent: 'center',
       }}>{children}</View>
       <Body weight="700" size={11} color={colors.ink2}>{label}</Body>
-    </View>
+    </Pressable>
   );
 }
 

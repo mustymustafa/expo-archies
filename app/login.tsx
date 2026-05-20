@@ -66,9 +66,7 @@ export default function LoginScreen() {
             <Mono size={10} color={colors.mute}>OR</Mono>
             <View style={{ flex: 1, height: 1, backgroundColor: colors.line2 }}/>
           </View>
-          <Pill kind="ink" size="lg" full icon={<Icons.Face color={colors.butter} size={18}/>} onPress={() => router.replace('/home')}>
-            Sign in with Face ID
-          </Pill>
+      
           <Mono size={11} color={colors.mute} style={{ textAlign: 'center', marginTop: 6 }}>
             Don't have an account?{' '}
             <Mono size={11} color={colors.pinkDeep} onPress={() => router.replace('/signup')}>Sign up</Mono>

@@ -12,6 +12,7 @@ import { Starburst } from '@/components/Starburst';
 import { Sunburst } from '@/components/Sunburst';
 import { Halftone } from '@/components/Halftone';
 import { Ribbon } from '@/components/Ribbon';
+import { comingSoon } from '@/lib/comingSoon';
 import { colors, shadow } from '@/theme/tokens';
 
 export default function OrderConfirmation() {
@@ -260,7 +261,7 @@ export default function OrderConfirmation() {
         }}
       >
         <Pressable
-          onPress={() => leaveConfirmation(router, '/order')}
+          onPress={() => comingSoon('Track order')}
           style={({ pressed }) => ({
             backgroundColor: colors.ink,
             borderRadius: 999,

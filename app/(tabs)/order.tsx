@@ -13,11 +13,29 @@ import { FoodSlot } from '@/components/FoodSlot';
 import { MenuFab } from '@/components/MenuFab';
 import { BagButton } from '@/components/BagButton';
 import { foodImages } from '@/lib/foodImages';
+import { comingSoon } from '@/lib/comingSoon';
+import { useCart } from '@/store/cart';
+import { findItem } from '@/lib/menuData';
 import { colors, shadow } from '@/theme/tokens';
 
 export default function OrderScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { add } = useCart();
+
+  const continueOrder = () => {
+    const item = findItem('triple-smash-combo');
+    if (item) {
+      add({
+        slug: item.slug,
+        name: item.name,
+        image: item.image,
+        unitPrice: item.priceGBP,
+        qty: 1,
+      });
+    }
+    router.push('/bag');
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.cream }}>
@@ -51,21 +69,7 @@ export default function OrderScreen() {
 
         {/* Mode toggle */}
         <View style={{ paddingHorizontal: 22, paddingBottom: 16 }}>
-          <View style={{
-            backgroundColor: '#fff', borderRadius: 999, padding: 4,
-            flexDirection: 'row',
-            borderWidth: 1.5, borderColor: colors.ink,
-            ...shadow(colors.ink, 2, 2),
-          }}>
-            {['Delivery', 'Collection', 'Dine-in'].map((m, i) => (
-              <View key={m} style={{
-                flex: 1, paddingVertical: 10, alignItems: 'center', borderRadius: 999,
-                backgroundColor: i === 0 ? colors.ink : 'transparent',
-              }}>
-                <Mono size={11} color={i === 0 ? colors.butter : colors.ink2}>{m}</Mono>
-              </View>
-            ))}
-          </View>
+
         </View>
 
         {/* Location card */}
@@ -84,32 +88,42 @@ export default function OrderScreen() {
                 <Icons.Pin color={colors.pinkDeep} size={20}/>
               </View>
               <View style={{ flex: 1 }}>
-                <Mono size={10} color={colors.mute}>DELIVER TO</Mono>
+                <Mono size={10} color={colors.mute}>COLLECT AT</Mono>
                 <Body weight="700" size={15} color={colors.ink}>M1 2GH · Manchester</Body>
               </View>
-              <Mono size={11} color={colors.pinkDeep}>CHANGE</Mono>
+              <Pressable hitSlop={8} onPress={() => comingSoon('Change address')}>
+                <Mono size={11} color={colors.pinkDeep}>CHANGE</Mono>
+              </Pressable>
             </View>
-            <View style={{
-              backgroundColor: colors.pink, borderRadius: 18,
-              padding: 14, flexDirection: 'row', alignItems: 'center', gap: 10,
-              borderWidth: 1.5, borderColor: colors.ink,
-            }}>
+            <Pressable
+              onPress={() => comingSoon('Use my current location')}
+              style={({ pressed }) => ({
+                backgroundColor: colors.pink, borderRadius: 18,
+                padding: 14, flexDirection: 'row', alignItems: 'center', gap: 10,
+                borderWidth: 1.5, borderColor: colors.ink,
+                opacity: pressed ? 0.9 : 1,
+              })}
+            >
               <Icons.Pin color={colors.cream} size={16}/>
               <Mono size={11} color={colors.cream} style={{ flex: 1 }}>USE MY CURRENT LOCATION</Mono>
               <Icons.Arrow color={colors.cream} size={14}/>
-            </View>
+            </Pressable>
           </View>
         </View>
 
         {/* Continue */}
-        <SectionHead kicker="Pick up where you left off" title="CONTINUE"/>
+        <SectionHead kicker="Pick up where you left off" title="CONTINUE" action={null}/>
         <View style={{ paddingHorizontal: 18, paddingBottom: 8 }}>
-          <View style={{
-            backgroundColor: '#fff', borderRadius: 24, padding: 14,
-            flexDirection: 'row', gap: 14, alignItems: 'center',
-            borderWidth: 1.5, borderColor: colors.ink,
-            ...shadow(colors.ink, 3, 3),
-          }}>
+          <Pressable
+            onPress={continueOrder}
+            style={({ pressed }) => ({
+              backgroundColor: '#fff', borderRadius: 24, padding: 14,
+              flexDirection: 'row', gap: 14, alignItems: 'center',
+              borderWidth: 1.5, borderColor: colors.ink,
+              opacity: pressed ? 0.94 : 1,
+              ...shadow(colors.ink, 3, 3),
+            })}
+          >
             <View style={{ width: 88, height: 88, borderRadius: 16, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink }}>
               <FoodSlot tone="pink" radius={0} label="basket" image={foodImages.smash} style={{ flex: 1 }}/>
             </View>
@@ -124,12 +138,12 @@ export default function OrderScreen() {
             }}>
               <Icons.Arrow color={colors.butter} size={14}/>
             </View>
-          </View>
+          </Pressable>
         </View>
 
         {/* Category grid */}
         <View style={{ marginTop: 24 }}>
-          <SectionHead kicker="Browse the menu" title="WHAT'S GOOD"/>
+          <SectionHead kicker="Browse the menu" title="WHAT'S GOOD" onActionPress={() => router.push('/browse-menu')}/>
           <View style={{ paddingHorizontal: 18, flexDirection: 'row', gap: 12 }}>
             <CategoryTile
               tone="pink"
@@ -177,11 +191,11 @@ export default function OrderScreen() {
 
         {/* Order again */}
         <View style={{ marginTop: 28 }}>
-          <SectionHead kicker="One-tap reorder" title="YOUR HISTORY"/>
+          <SectionHead kicker="One-tap reorder" title="YOUR HISTORY" onActionPress={() => comingSoon('Order history')}/>
           <View style={{ paddingHorizontal: 18, gap: 10 }}>
-            <HistoryRow date="TUE, 14 MAY" title="Triple Smash + Curly" sum="£11.20"/>
-            <HistoryRow date="SUN, 12 MAY" title="Salted Caramel Shake" sum="£4.95"/>
-            <HistoryRow date="FRI, 10 MAY" title="Hot Honey Combo" sum="£12.45"/>
+            <HistoryRow date="TUE, 14 MAY" title="Triple Smash + Curly" sum="£11.20" onPress={() => comingSoon('Reorder')}/>
+            <HistoryRow date="SUN, 12 MAY" title="Salted Caramel Shake" sum="£4.95" onPress={() => comingSoon('Reorder')}/>
+            <HistoryRow date="FRI, 10 MAY" title="Hot Honey Combo" sum="£12.45" onPress={() => comingSoon('Reorder')}/>
           </View>
         </View>
       </ScrollView>
@@ -259,14 +273,15 @@ function CategoryTile({ tone, title, count, big, lock, image, onPress }: any) {
   );
 }
 
-function HistoryRow({ date, title, sum }: any) {
+function HistoryRow({ date, title, sum, onPress }: any) {
   return (
-    <View style={{
+    <Pressable onPress={onPress} style={({ pressed }) => ({
       backgroundColor: '#fff', borderRadius: 18, padding: 14,
       flexDirection: 'row', alignItems: 'center', gap: 14,
       borderWidth: 1.5, borderColor: colors.ink,
+      opacity: pressed ? 0.94 : 1,
       ...shadow(colors.ink, 2, 2),
-    }}>
+    })}>
       <View style={{
         width: 44, height: 44, borderRadius: 12, backgroundColor: colors.pinkMist,
         alignItems: 'center', justifyContent: 'center',
@@ -282,6 +297,6 @@ function HistoryRow({ date, title, sum }: any) {
         <Body weight="700" size={14} color={colors.ink}>{sum}</Body>
         <Mono size={10} color={colors.pinkDeep} style={{ marginTop: 2 }}>REORDER →</Mono>
       </View>
-    </View>
+    </Pressable>
   );
 }

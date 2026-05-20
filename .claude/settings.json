@@ -5,7 +5,17 @@
       "Bash(yarn add *)",
       "Bash(yarn config *)",
       "Bash(npm view *)",
-      "Bash(npx expo-doctor *)"
+      "Bash(npx expo-doctor *)",
+      "Bash(ls /tmp/*.png /tmp/*.jpg /tmp/*.jpeg 2>/dev/null | head -20; ls ~/Downloads/*.png ~/Downloads/*.jpg 2>/dev/null | grep -i \"logo\\\\|archie\\\\|untitled\" | head -10)",
+      "Read(//Users/musty/Downloads/**)",
+      "Bash(cp /Users/musty/Downloads/images.jpeg /Users/musty/Downloads/expo-archies/assets/logo-source.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/musty/Downloads/expo-archies/assets/logo-source.jpg)",
+      "Bash(python3 -c \"import cairosvg; print\\('cairosvg ok'\\)\")",
+      "Bash(node -e \"try { require\\('sharp'\\); console.log\\('sharp ok'\\) } catch\\(e\\) { console.log\\('no sharp'\\) }\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"import cairosvg, PIL; print\\('both ok'\\)\")",
+      "Bash(python3 /tmp/build_splash.py)",
+      "Bash(grep -E \"\\(^[^/]*$|package\\\\.json|app/|src/\\)\")"
     ]
   }
 }

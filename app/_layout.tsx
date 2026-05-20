@@ -10,6 +10,7 @@ import { useArchiesFonts } from '@/hooks/useArchiesFonts';
 import { View } from 'react-native';
 import { colors } from '@/theme/tokens';
 import { CartProvider } from '@/store/cart';
+import { LaunchPromo } from '@/components/LaunchPromo';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -35,6 +36,7 @@ export default function RootLayout() {
             <Stack.Screen name="checkout" options={{ presentation: 'modal', animation: 'slide_from_right' }}/>
             <Stack.Screen name="order-confirmation" options={{ gestureEnabled: false, animation: 'fade', headerBackVisible: false }}/>
           </Stack>
+          <LaunchPromo/>
         </CartProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

@@ -144,4 +144,28 @@ export const Icons = {
       <Path d="M4 18h14" stroke={color} strokeWidth={2} strokeLinecap="round"/>
     </Svg>
   ),
+  Globe: ({ color = '#1F1014', size = 22 }: P) => (
+    <Svg width={size} height={size} viewBox="0 0 22 22" fill="none">
+      <Circle cx={11} cy={11} r={8} stroke={color} strokeWidth={2}/>
+      <Path d="M3 11h16M11 3c2.5 2.5 2.5 13.5 0 16M11 3c-2.5 2.5-2.5 13.5 0 16" stroke={color} strokeWidth={2} strokeLinecap="round"/>
+    </Svg>
+  ),
+  X: ({ color = '#1F1014', size = 22 }: P) => (
+    <Svg width={size} height={size} viewBox="0 0 22 22" fill="none">
+      <Path d="M4 4l14 14M18 4L4 18" stroke={color} strokeWidth={2.4} strokeLinecap="round"/>
+    </Svg>
+  ),
+  Instagram: ({ color = '#1F1014', size = 22 }: P) => (
+    <Svg width={size} height={size} viewBox="0 0 22 22" fill="none">
+      <Rect x={3} y={3} width={16} height={16} rx={5} stroke={color} strokeWidth={2}/>
+      <Circle cx={11} cy={11} r={3.6} stroke={color} strokeWidth={2}/>
+      <Circle cx={16} cy={6} r={1} fill={color}/>
+    </Svg>
+  ),
+  TikTok: ({ color = '#1F1014', size = 22 }: P) => (
+    <Svg width={size} height={size} viewBox="0 0 22 22" fill="none">
+      <Path d="M13 3v10.2a3.2 3.2 0 11-3.2-3.2" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+      <Path d="M13 3c.4 2.6 2 4.2 4.6 4.6" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+    </Svg>
+  ),
 };

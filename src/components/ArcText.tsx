@@ -21,7 +21,7 @@ export function ArcText({
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
       <Defs>
-        <Path id="arc" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
+        <Path id="arc" d="M 50,50 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0"/>
       </Defs>
       <SvgText
         fill={color}

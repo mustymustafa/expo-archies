@@ -41,7 +41,7 @@ export default function WelcomeScreen() {
       >
         <Logo size={44} />
         <Mono size={11} color={colors.cream}>
-          EST · 1957
+          EST · 2010
         </Mono>
       </View>
 
@@ -196,7 +196,7 @@ export default function WelcomeScreen() {
           upper={false}
           style={{ marginTop: 6 }}
         >
-          — since '57, slung with love.
+          — since '10, slung with love.
         </Italic>
       </View>
       {/* CTA stack */}

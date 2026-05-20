@@ -13,6 +13,7 @@ import { Ribbon } from '@/components/Ribbon';
 import { foodImages } from '@/lib/foodImages';
 import { findItem } from '@/lib/menuData';
 import { useCart } from '@/store/cart';
+import { comingSoon } from '@/lib/comingSoon';
 import { colors, shadow } from '@/theme/tokens';
 
 export default function ItemScreen() {
@@ -164,7 +165,7 @@ export default function ItemScreen() {
           <View style={{ alignItems: 'center' }}>
             <Mono size={10} color={colors.cream}>ORDER NOW</Mono>
           </View>
-          <CircleBtn>
+          <CircleBtn onPress={() => comingSoon('Save to favorites')}>
             <Icons.Heart size={18} />
           </CircleBtn>
         </View>

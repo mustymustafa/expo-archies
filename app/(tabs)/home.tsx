@@ -19,6 +19,7 @@ import { FoodSlot } from "@/components/FoodSlot";
 import { MenuFab } from "@/components/MenuFab";
 import { BagButton } from "@/components/BagButton";
 import { foodImages } from "@/lib/foodImages";
+import { comingSoon } from "@/lib/comingSoon";
 import { colors, shadow } from "@/theme/tokens";
 
 export default function HomeScreen() {
@@ -118,7 +119,7 @@ export default function HomeScreen() {
           <ActionTile
             flex={1}
             tone="butter"
-            onPress={() => router.push("/menu")}
+            onPress={() => comingSoon('Saved favorites')}
             icon={<Icons.Bookmark color={colors.ink} size={18} />}
             kicker="14 ITEMS"
             title="SAVED"
@@ -126,7 +127,7 @@ export default function HomeScreen() {
           <ActionTile
             flex={1}
             tone="pink"
-            onPress={() => router.push("/order")}
+            onPress={() => comingSoon('Reorder')}
             icon={<Icons.Refresh color={colors.cream} size={18} />}
             kicker="ONE TAP"
             title="REORDER"
@@ -562,8 +563,13 @@ function BigFoodCard({ tone, title, meta, tag, badge, image, onPress }: any) {
           </Mono>
         </View>
       )}
-      <View
-        style={{
+      <Pressable
+        onPress={(e) => {
+          e.stopPropagation();
+          comingSoon('Save to favorites');
+        }}
+        hitSlop={6}
+        style={({ pressed }) => ({
           position: "absolute",
           top: 12,
           right: 12,
@@ -573,10 +579,11 @@ function BigFoodCard({ tone, title, meta, tag, badge, image, onPress }: any) {
           backgroundColor: "rgba(31,16,20,0.5)",
           alignItems: "center",
           justifyContent: "center",
-        }}
+          opacity: pressed ? 0.7 : 1,
+        })}
       >
         <Icons.Heart color={colors.cream} size={16} filled />
-      </View>
+      </Pressable>
       <View style={{ position: "absolute", left: 16, right: 16, bottom: 14 }}>
         {tag && (
           <Mono size={9} color="rgba(255,241,220,0.9)">
