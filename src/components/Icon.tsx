@@ -126,4 +126,22 @@ export const Icons = {
       <Path d="M3 3l8 8M11 3l-8 8" stroke={color} strokeWidth={2} strokeLinecap="round"/>
     </Svg>
   ),
+  Plus: ({ color = '#1F1014', size = 16 }: P) => (
+    <Svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <Path d="M8 3v10M3 8h10" stroke={color} strokeWidth={2.2} strokeLinecap="round"/>
+    </Svg>
+  ),
+  Minus: ({ color = '#1F1014', size = 16 }: P) => (
+    <Svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <Path d="M3 8h10" stroke={color} strokeWidth={2.2} strokeLinecap="round"/>
+    </Svg>
+  ),
+  Burger: ({ color = '#1F1014', size = 22 }: P) => (
+    <Svg width={size} height={size} viewBox="0 0 22 22" fill="none">
+      <Path d="M3 8c0-3 3.5-5 8-5s8 2 8 5" stroke={color} strokeWidth={2} strokeLinecap="round"/>
+      <Path d="M3 11h16" stroke={color} strokeWidth={2} strokeLinecap="round"/>
+      <Path d="M3 14c1 1 2 0 3 1s2 0 3 1 2 0 3 0 2 1 3 1 2-1 3-1" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+      <Path d="M4 18h14" stroke={color} strokeWidth={2} strokeLinecap="round"/>
+    </Svg>
+  ),
 };
