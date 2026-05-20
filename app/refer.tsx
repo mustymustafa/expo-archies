@@ -101,7 +101,7 @@ export default function ReferScreen() {
 
         {/* Friends progress */}
         <View style={{ marginTop: 28 }}>
-          <SectionHead kicker="Your referrals" title="3 ON THE HOOK"/>
+          <SectionHead kicker="Your referrals" title="3 ON THE HOOK" onActionPress={() => comingSoon('Full referrals list')}/>
           <View style={{ paddingHorizontal: 18, gap: 8 }}>
             <ReferRow name="Maya · @mayaeats" status="ORDERED" credit="+£5"/>
             <ReferRow name="Tom · @tom.smashes" status="SIGNED UP" credit="PENDING"/>

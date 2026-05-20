@@ -97,11 +97,10 @@ export default function MenuScreen() {
                         <MenuRow icon={<Icons.Share color={colors.cream} size={18}/>} label="Refer a friend" onPress={() => router.push('/refer')}/>
             <MenuRow icon={<Icons.Bookmark color={colors.cream} size={18}/>} label="Saved favorites" detail="14" onPress={() => comingSoon('Saved favorites')}/>
             <MenuRow icon={<Icons.Refresh color={colors.cream} size={18}/>} label="Order history" detail="23 orders" onPress={() => comingSoon('Order history')}/>
-            <MenuRow icon={<Icons.Heart color={colors.cream} size={18}/>} label="Rewards" detail="1 ready" highlight/>
+            <MenuRow icon={<Icons.Heart color={colors.cream} size={18}/>} label="Rewards" detail="1 ready" highlight onPress={() => comingSoon('Rewards')}/>
           </MenuGroup>
       
           <MenuGroup title="More" last>
-            <MenuRow icon={<Icons.Share color={colors.cream} size={18}/>} label="Refer a friend" onPress={() => router.push('/refer')}/>
             <MenuRow icon={<Icons.QR color={colors.cream} size={18}/>} label="eGift cards" onPress={() => comingSoon('eGift cards')}/>
             <MenuRow icon={<Icons.Bell color={colors.cream} size={18}/>} label="Notifications" onPress={() => comingSoon('Notifications')}/>
           </MenuGroup>
