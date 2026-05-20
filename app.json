@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Archie's",
+    "slug": "archies-retro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "archies",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "co.archies.retro"
+    },
+    "android": {
+      "package": "co.archies.retro"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
