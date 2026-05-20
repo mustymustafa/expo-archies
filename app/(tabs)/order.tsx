@@ -109,7 +109,7 @@ export default function OrderScreen() {
             ...shadow(colors.ink, 3, 3),
           }}>
             <View style={{ width: 88, height: 88, borderRadius: 16, overflow: 'hidden', borderWidth: 1.5, borderColor: colors.ink }}>
-              <FoodSlot tone="pink" radius={0} label="basket" image={foodImages.combo} style={{ flex: 1 }}/>
+              <FoodSlot tone="pink" radius={0} label="basket" image={foodImages.smash} style={{ flex: 1 }}/>
             </View>
             <View style={{ flex: 1 }}>
               <Mono size={9} color={colors.pinkDeep}>BASKET · 3 ITEMS</Mono>
@@ -137,7 +137,7 @@ export default function OrderScreen() {
           </View>
           <View style={{ paddingHorizontal: 18, flexDirection: 'row', gap: 12, marginTop: 12 }}>
             <CategoryTile tone="night" title="LATE NIGHT" count="OPEN 'TIL 3AM" image={foodImages.wings}/>
-            <CategoryTile tone="deep" title="SECRET MENU" count="MEMBERS ONLY" lock image={foodImages.secret}/>
+            <CategoryTile tone="deep" title="SECRET MENU" count="MEMBERS ONLY" lock image={foodImages.spread}/>
           </View>
         </View>
 
@@ -165,16 +165,17 @@ function CircleBtn({ children, onPress }: any) {
   );
 }
 
-function CategoryTile({ tone, title, count, big, lock, image }: any) {
+function CategoryTile({ tone, title, count, big, lock }: any) {
   const height = big ? 296 : 142;
+  const flex = big ? undefined : undefined;
   const isDark = ['pink', 'night', 'deep'].includes(tone);
   return (
     <View style={{
-      flex: 1, height,
+      flex: big ? 1 : 1, height,
       borderRadius: 22, overflow: 'hidden',
       borderWidth: 1.5, borderColor: colors.ink,
     }}>
-      <FoodSlot tone={tone} radius={0} label={title.toLowerCase()} image={image} style={{ flex: 1 }}/>
+      <FoodSlot tone={tone} radius={0} label={title.toLowerCase()} style={{ flex: 1 }}/>
       <View style={{ position: 'absolute', left: 14, right: 14, bottom: 14 }}>
         {lock && (
           <View style={{
