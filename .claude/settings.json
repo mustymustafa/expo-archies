@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx expo *)",
+      "Bash(yarn add *)",
+      "Bash(yarn config *)",
+      "Bash(npm view *)",
+      "Bash(npx expo-doctor *)"
+    ]
+  }
+}
