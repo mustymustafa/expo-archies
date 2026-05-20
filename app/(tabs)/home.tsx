@@ -167,14 +167,14 @@ export default function HomeScreen() {
               tag="LAST TUESDAY"
               title="Salted Caramel Shake"
               meta="£4.95 · add-on"
-              image={foodImages.shake}
+              image={foodImages.milkshake}
             />
             <BigFoodCard
               tone="blush"
               tag="REORDER READY"
               title="Curly Fries · Large"
               meta="£3.20 · 6 min"
-              image={foodImages.fries}
+              image={foodImages.curly}
             />
           </ScrollView>
         </View>
@@ -195,7 +195,7 @@ export default function HomeScreen() {
               title="Hot Honey Crispy"
               meta="3.1 mi · 8 min"
               rank={1}
-              image={foodImages.wings}
+              image={foodImages.honey}
             />
             <MidFoodCard
               tone="cream"
@@ -209,7 +209,7 @@ export default function HomeScreen() {
               title="Pink Sauce Wings"
               meta="3.5 mi · 10 min"
               rank={3}
-              image={foodImages.wings}
+              image={foodImages.pink}
             />
             <MidFoodCard
               tone="deep"
@@ -297,7 +297,7 @@ export default function HomeScreen() {
                     tone="night"
                     radius={18}
                     label="loaded fries"
-                    image={foodImages.fries}
+                    image={foodImages.late}
                     style={{ flex: 1 }}
                   />
                 </View>
@@ -320,7 +320,7 @@ export default function HomeScreen() {
               title="The OG Smash"
               addicts="12.4K addicts"
               tag="🔥 No.1 this week"
-              image={foodImages.smash}
+              image={foodImages.og}
             />
             <PortraitCard
               tone="blush"
@@ -328,7 +328,7 @@ export default function HomeScreen() {
               title="Pink Sauce Crispy"
               addicts="9.8K addicts"
               tag="↑ trending"
-              image={foodImages.wings}
+              image={foodImages.crispy}
             />
             <PortraitCard
               tone="cream"
